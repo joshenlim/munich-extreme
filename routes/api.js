@@ -72,9 +72,15 @@ router.get("/", function (req, res, next) {
      * /api?q=ede15740:%20what%20is%205%20multiplied%20by%208
      */
     if (question.includes("plus")) {
-      const [a, b, x, c, y] = question.split(" ");
-      const sum = Number(x) + Number(y);
-
+      /**
+       * /api?q=ee6f27b0:%20what%20is%202%20plus%204%20plus%2017
+       */
+      const questionSplit = question.split("plus").map((x) => x.trim());
+      const firstNumber = questionSplit[0].split(" ")[2];
+      const numbers = [firstNumber]
+        .concat(questionSplit.slice(1))
+        .map((x) => Number(x));
+      const sum = numbers.reduce((partialSum, a) => partialSum + a, 0);
       console.log("Sum", sum);
       return res.send(sum.toString());
     } else if (question.includes("minus")) {
