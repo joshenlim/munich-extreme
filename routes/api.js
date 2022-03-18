@@ -16,7 +16,7 @@ router.get("/", function (req, res, next) {
     const [a, b, x, c, y] = question.split(" ");
     const sum = Number(x) + Number(y);
     console.log("Sum", sum);
-    res.send(sum);
+    res.send(sum.toString());
   }
 
   res.send({ name: "JandJ" });
