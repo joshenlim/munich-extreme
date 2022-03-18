@@ -139,6 +139,7 @@ router.get("/", function (req, res, next) {
     return res.send("not sure");
   }
 
+  console.log("QUESTION MISSED", payloads);
   return res.send((0).toString());
 });
 
