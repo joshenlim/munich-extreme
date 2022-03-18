@@ -1,6 +1,11 @@
 var express = require("express");
 var router = express.Router();
 
+function isPrime(num) {
+  for (let i = 2; i * i <= num; i++) if (num % i === 0) return false;
+  return num > 1;
+}
+
 router.get("/", function (req, res, next) {
   const payloads = req.query.q.split(":").map((x) => x.trim().toLowerCase());
 
@@ -17,14 +22,23 @@ router.get("/", function (req, res, next) {
      * /api?q=a923df70:%20which%20of%20the%20following%20numbers%20is%20both%20a%20square%20and%20a%20cube:%202209,%20872,%201296,%2093
      */
 
+    /**
+     * /api?q=2c96f660:%20which%20of%20the%20following%20numbers%20are%20primes:%20931,%20283"
+     */
+
     if (question.includes("largest")) {
       const numbers = payloads[2].split(",").map((x) => Number(x.trim()));
       const maxNumber = Math.max(...numbers);
       console.log("Do max", maxNumber);
       return res.send(maxNumber.toString());
     } else if (question.includes("square and a cube")) {
-      console.log("Square and a cube");
       return res.send((0).toString());
+    } else if (question.includes("primes")) {
+      const numbers = payloads[2].split(",").map((x) => Number(x.trim()));
+      const result = numbers.filter((number) => {
+        if (isPrime(number)) return number;
+      });
+      return res.send(result.toString());
     }
   } else if (question.includes("what")) {
     // what is 2 + 2
@@ -48,6 +62,13 @@ router.get("/", function (req, res, next) {
 
       console.log("Product", product);
       return res.send(product.toString());
+    } else if (question.includes("divided")) {
+      const [a, b, x, c, d, y] = question.split(" ");
+      console.log("Divide", x, y);
+      const divider = Number(x) / Number(y);
+
+      console.log("Divide", divider);
+      return res.send(divider.toString());
     }
   }
 });
