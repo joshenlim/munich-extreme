@@ -77,6 +77,12 @@ router.get("/", function (req, res, next) {
 
       console.log("Sum", sum);
       return res.send(sum.toString());
+    } else if (question.includes("minus")) {
+      const [a, b, x, c, y] = question.split(" ");
+      const sum = Number(x) - Number(y);
+
+      console.log("Sum", sum);
+      return res.send(sum.toString());
     } else if (question.includes("multiplied")) {
       const [a, b, x, c, d, y] = question.split(" ");
       console.log("Multiply", x, y);
