@@ -134,8 +134,8 @@ router.get("/", function (req, res, next) {
   } else if (question.includes("what is the color of a")) {
     // what is your name
 
-    const split = question.split(" ");
-    const object = split[split.length - 1];
+    const split = question.split("the color of a ");
+    const object = split[1];
 
     switch (object) {
       case "banana":
@@ -143,6 +143,7 @@ router.get("/", function (req, res, next) {
         break;
 
       default:
+        return res.send("banana");
         break;
     }
     return res.send("not sure");
