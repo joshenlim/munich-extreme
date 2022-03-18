@@ -6,6 +6,11 @@ function isPrime(num) {
   return num > 1;
 }
 
+function fibonacci(num) {
+  if (num <= 1) return 1;
+  return fibonacci(num - 1) + fibonacci(num - 2);
+}
+
 router.get("/", function (req, res, next) {
   const payloads = req.query.q.split(":").map((x) => x.trim().toLowerCase());
 
@@ -148,8 +153,12 @@ router.get("/", function (req, res, next) {
       // const divider = Number(x) / Number(y);
       // // console.log("Divide", divider);
       // return res.send(divider.toString());
+    } else if (question.includes("fibonacci")) {
+      const idx = question.split(" ")[3];
+      const idxNumber = Number(idx.slice(0, idx.length - 2));
+      const result = fibonacci(idxNumber);
+      return res.send(result.toString());
     }
-  } else if (question.includes("fibonacci")) {
   }
 
   console.log("QUESTION MISSED", payloads);
