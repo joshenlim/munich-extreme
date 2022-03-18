@@ -81,6 +81,10 @@ router.get("/", function (req, res, next) {
       console.log("Product", product);
       return res.send(product.toString());
     }
+  } else if (question.includes("what is your name")) {
+    // what is your name
+
+    return res.send("JandJ");
   }
 });
 
