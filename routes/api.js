@@ -44,13 +44,10 @@ router.get("/", function (req, res, next) {
         break;
     }
   } else if (question.includes("what is the capital of")) {
-    // what is your name
-
-    console.log("question", question);
+    // what is the capital of
 
     const split = question.split("what is the capital of ");
 
-    console.log("split", split);
     const country = split[1];
 
     console.log(country);
