@@ -75,27 +75,65 @@ router.get("/", function (req, res, next) {
       const [a, b, x, c, y] = question.split(" ");
       const sum = Number(x) + Number(y);
 
-      console.log("Sum", sum);
+      // console.log("Sum", sum);
       return res.send(sum.toString());
     } else if (question.includes("multiplied")) {
       const [a, b, x, c, d, y] = question.split(" ");
-      console.log("Multiply", x, y);
+      // console.log("Multiply", x, y);
       const product = Number(x) * Number(y);
 
-      console.log("Product", product);
+      // console.log("Product", product);
       return res.send(product.toString());
     } else if (question.includes("divided")) {
       const [a, b, x, c, d, y] = question.split(" ");
-      console.log("Divide", x, y);
+      // console.log("Divide", x, y);
       const divider = Number(x) / Number(y);
 
-      console.log("Divide", divider);
+      // console.log("Divide", divider);
       return res.send(divider.toString());
     }
   } else if (question.includes("what is your name")) {
     // what is your name
 
     return res.send("JandJ");
+  } else if (question.includes("who played james bond in")) {
+    // what is your name
+
+    console.log("question", question);
+
+    const split = question.split("in the film ");
+
+    console.log("split", split);
+    const actor = split[1];
+
+    console.log(actor);
+
+    if (!actor) return res.send("Roger Moore");
+
+    switch (actor) {
+      case "dr no":
+        return res.send("Sean Connery");
+        break;
+
+      default:
+        return res.send("Roger Moore");
+        break;
+    }
+  } else if (question.includes("what is the color of a")) {
+    // what is your name
+
+    const split = question.split(" ");
+    const object = split[split.length - 1];
+
+    switch (object) {
+      case "banana":
+        return res.send("banana");
+        break;
+
+      default:
+        break;
+    }
+    return res.send("not sure");
   }
   return res.send((0).toString());
 });
