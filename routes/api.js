@@ -11,7 +11,7 @@ router.get("/", function (req, res, next) {
     console.log("Do max");
     const numbers = payloads[2].split(",").map((x) => Number(x.trim()));
     const maxNumber = Math.max(...numbers);
-    console.log("numbers", numbers, maxNumber);
+    res.send(maxNumber.toString());
   } else if (question.includes("what")) {
     console.log("Do sum");
   }
