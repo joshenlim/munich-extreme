@@ -147,21 +147,11 @@ router.get("/", function (req, res, next) {
       //
       return res.send(divider.toString());
     } else if (question.includes("power")) {
-      console.log("POWERRRR");
-      // const [a, b, x, c, d, y] = question.split(" ");
-
       const split = question.replace("what is ", "").split("to the power of ");
-      console.log(split);
 
       const powerOf = Math.pow(Number(split[0]), Number(split[1]));
 
-      console.log(powerOf);
-
       return res.send(powerOf.toString());
-      // // console.log("Divide", x, y);
-      // const divider = Number(x) / Number(y);
-      // // console.log("Divide", divider);
-      // return res.send(divider.toString());
     } else if (question.includes("fibonacci")) {
       const idx = question.split(" ")[3];
       const idxNumber = Number(idx.slice(0, idx.length - 2));
