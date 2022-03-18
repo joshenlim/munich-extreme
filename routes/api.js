@@ -24,6 +24,38 @@ router.get("/", function (req, res, next) {
       return res.send(maxNumber.toString());
     } else if (question.includes("square and a cube")) {
       console.log("Square and a cube");
+
+      // /api?q=a923df70:%20which%20of%20the%20following%20numbers%20is%20both%20a%20square%20and%20a%20cube:%202209,%20872,%201296,%2093
+
+      // console.log(decodeURI(payloads[2]));
+
+      const numbers = payloads[2].split(",").map((x) => Number(x.trim()));
+
+      console.log("numbers to check", numbers);
+
+      // array of numbers (:string) that are confirmed
+      confirmedNumbers = [];
+
+      numbers.map((number) => {
+        console.log("mapping...");
+        const _number = Number(number);
+        cubeRoot = Math.cbrt(_number);
+        squareRoot = Math.sqrt(_number);
+
+        checkRoot = cubeRoot % 1 === 0;
+        checkSquare = squareRoot % 1 === 0;
+
+        if (checkRoot + checkSquare) {
+          confirmedNumbers.push(number);
+        }
+      });
+
+      console.log("confirmed numebrs", confirmedNumbers);
+
+      return res.send(confirmedNumbers.toString());
+
+      Math.cbrt();
+
       return res.send((0).toString());
     }
   } else if (question.includes("what")) {
