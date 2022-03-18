@@ -93,6 +93,7 @@ router.get("/", function (req, res, next) {
       return res.send(divider.toString());
     }
   }
+  return res.send((0).toString());
 });
 
 module.exports = router;
