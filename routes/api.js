@@ -32,7 +32,29 @@ router.get("/", function (req, res, next) {
       console.log("Do max", maxNumber);
       return res.send(maxNumber.toString());
     } else if (question.includes("square and a cube")) {
-      return res.send((0).toString());
+      console.log("Square and a cube");
+
+      // /api?q=a923df70:%20which%20of%20the%20following%20numbers%20is%20both%20a%20square%20and%20a%20cube:%202209,%20872,%201296,%2093
+
+      const numbers = payloads[2].split(",").map((x) => Number(x.trim()));
+
+      // array of numbers (:string) that are confirmed
+      confirmedNumbers = [];
+
+      numbers.map((number) => {
+        console.log("mapping...");
+        const _number = Number(number);
+        cubeRoot = Math.cbrt(_number);
+        squareRoot = Math.sqrt(_number);
+
+        checkRoot = cubeRoot % 1 === 0;
+        checkSquare = squareRoot % 1 === 0;
+
+        if (checkRoot + checkSquare) {
+          confirmedNumbers.push(number);
+        }
+      });
+      return res.send(confirmedNumbers.toString());
     } else if (question.includes("primes")) {
       const numbers = payloads[2].split(",").map((x) => Number(x.trim()));
       const result = numbers.filter((number) => {
