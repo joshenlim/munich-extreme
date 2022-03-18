@@ -24,6 +24,7 @@ router.get("/", function (req, res, next) {
       return res.send(maxNumber.toString());
     } else if (question.includes("square and a cube")) {
       console.log("Square and a cube");
+      return res.send((0).toString());
     }
   } else if (question.includes("what")) {
     // what is 2 + 2
@@ -34,16 +35,18 @@ router.get("/", function (req, res, next) {
     /**
      * /api?q=ede15740:%20what%20is%205%20multiplied%20by%208
      */
-    const [a, b, x, c, y] = question.split(" ");
     if (question.includes("plus")) {
+      const [a, b, x, c, y] = question.split(" ");
       const sum = Number(x) + Number(y);
 
       console.log("Sum", sum);
       return res.send(sum.toString());
     } else if (question.includes("multiplied")) {
+      const [a, b, x, c, d, y] = question.split(" ");
+      console.log("Multiply", x, y);
       const product = Number(x) * Number(y);
 
-      console.log("Product", sum);
+      console.log("Product", product);
       return res.send(product.toString());
     }
   }
