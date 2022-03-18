@@ -12,7 +12,51 @@ router.get("/", function (req, res, next) {
   console.log("Query", payloads);
 
   const [id, question] = payloads;
-  if (question.includes("which")) {
+
+  if (question.includes("what is your name")) {
+    // what is your name
+
+    return res.send("JandJ");
+  } else if (question.includes("who played james bond in")) {
+    // what is your name
+
+    console.log("question", question);
+
+    const split = question.split("in the film ");
+
+    console.log("split", split);
+    const actor = split[1];
+
+    console.log(actor);
+
+    if (!actor) return res.send("Roger Moore");
+
+    switch (actor) {
+      case "dr no":
+        return res.send("Sean Connery");
+        break;
+
+      default:
+        return res.send("Roger Moore");
+        break;
+    }
+  } else if (question.includes("what is the color of a")) {
+    // what is your name
+
+    const split = question.split("the color of a ");
+    const object = split[1];
+
+    switch (object) {
+      case "banana":
+        return res.send("banana");
+        break;
+
+      default:
+        return res.send("banana");
+        break;
+    }
+    return res.send("not sure");
+  } else if (question.includes("which")) {
     // which of the following numbers is largest: 1, 2
     /**
      * /api?q=619383a0:%20which%20of%20the%20following%20numbers%20is%20the%20largest:%20722,%208
@@ -103,50 +147,14 @@ router.get("/", function (req, res, next) {
 
       // console.log("Divide", divider);
       return res.send(divider.toString());
+    } else if (question.includes("power")) {
+      console.log("POWERRRR");
+      // const [a, b, x, c, d, y] = question.split(" ");
+      // // console.log("Divide", x, y);
+      // const divider = Number(x) / Number(y);
+      // // console.log("Divide", divider);
+      // return res.send(divider.toString());
     }
-  } else if (question.includes("what is your name")) {
-    // what is your name
-
-    return res.send("JandJ");
-  } else if (question.includes("who played james bond in")) {
-    // what is your name
-
-    console.log("question", question);
-
-    const split = question.split("in the film ");
-
-    console.log("split", split);
-    const actor = split[1];
-
-    console.log(actor);
-
-    if (!actor) return res.send("Roger Moore");
-
-    switch (actor) {
-      case "dr no":
-        return res.send("Sean Connery");
-        break;
-
-      default:
-        return res.send("Roger Moore");
-        break;
-    }
-  } else if (question.includes("what is the color of a")) {
-    // what is your name
-
-    const split = question.split("the color of a ");
-    const object = split[1];
-
-    switch (object) {
-      case "banana":
-        return res.send("banana");
-        break;
-
-      default:
-        return res.send("banana");
-        break;
-    }
-    return res.send("not sure");
   }
   return res.send((0).toString());
 });
