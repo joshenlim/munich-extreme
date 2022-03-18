@@ -9,8 +9,6 @@ function isPrime(num) {
 router.get("/", function (req, res, next) {
   const payloads = req.query.q.split(":").map((x) => x.trim().toLowerCase());
 
-  console.log("Query", payloads);
-
   const [id, question] = payloads;
   if (question.includes("which")) {
     // which of the following numbers is largest: 1, 2
@@ -29,11 +27,8 @@ router.get("/", function (req, res, next) {
     if (question.includes("largest")) {
       const numbers = payloads[2].split(",").map((x) => Number(x.trim()));
       const maxNumber = Math.max(...numbers);
-      console.log("Do max", maxNumber);
       return res.send(maxNumber.toString());
     } else if (question.includes("square and a cube")) {
-      console.log("Square and a cube");
-
       // /api?q=a923df70:%20which%20of%20the%20following%20numbers%20is%20both%20a%20square%20and%20a%20cube:%202209,%20872,%201296,%2093
 
       const numbers = payloads[2].split(",").map((x) => Number(x.trim()));
@@ -42,7 +37,6 @@ router.get("/", function (req, res, next) {
       confirmedNumbers = [];
 
       numbers.map((number) => {
-        console.log("mapping...");
         const _number = Number(number);
         cubeRoot = Math.cbrt(_number);
         squareRoot = Math.sqrt(_number);
@@ -81,28 +75,29 @@ router.get("/", function (req, res, next) {
         .concat(questionSplit.slice(1))
         .map((x) => Number(x));
       const sum = numbers.reduce((partialSum, a) => partialSum + a, 0);
-      console.log("Sum", sum);
+
       return res.send(sum.toString());
     } else if (question.includes("minus")) {
       const [a, b, x, c, y] = question.split(" ");
       const sum = Number(x) - Number(y);
 
-      // console.log("Sum", sum);
+      //
       return res.send(sum.toString());
     } else if (question.includes("multiplied")) {
       const [a, b, x, c, d, y] = question.split(" ");
-      // console.log("Multiply", x, y);
+      //
       const product = Number(x) * Number(y);
 
-      // console.log("Product", product);
+      //
       return res.send(product.toString());
     } else if (question.includes("divided")) {
       const [a, b, x, c, d, y] = question.split(" ");
-      // console.log("Divide", x, y);
+      //
       const divider = Number(x) / Number(y);
 
-      // console.log("Divide", divider);
+      //
       return res.send(divider.toString());
+    } else if (question.includes("fibonacci")) {
     }
   } else if (question.includes("what is your name")) {
     // what is your name
@@ -111,14 +106,9 @@ router.get("/", function (req, res, next) {
   } else if (question.includes("who played james bond in")) {
     // what is your name
 
-    console.log("question", question);
-
     const split = question.split("in the film ");
 
-    console.log("split", split);
     const actor = split[1];
-
-    console.log(actor);
 
     if (!actor) return res.send("Roger Moore");
 
@@ -147,6 +137,7 @@ router.get("/", function (req, res, next) {
     }
     return res.send("not sure");
   }
+
   return res.send((0).toString());
 });
 
