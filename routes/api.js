@@ -43,6 +43,29 @@ router.get("/", function (req, res, next) {
         return res.send("Roger Moore");
         break;
     }
+  } else if (question.includes("what is the capital of")) {
+    // what is your name
+
+    console.log("question", question);
+
+    const split = question.split("what is the capital of ");
+
+    console.log("split", split);
+    const country = split[1];
+
+    console.log(country);
+
+    if (!country) return res.send("Canberra");
+
+    switch (country.toLowerCase()) {
+      case "australia":
+        return res.send("Canberra");
+        break;
+
+      default:
+        return res.send("Canberra");
+        break;
+    }
   } else if (question.includes("what is the color of a")) {
     // what is your name
 
